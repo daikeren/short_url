@@ -1,6 +1,7 @@
+
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="utf-8">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>{% block title %}{% endblock title %}</title>
@@ -8,83 +9,91 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le styles -->
-    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
-    <link href="{% static "css/bootstrap-responsive.min.css" %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static "css/readble/bootstrap.min.css" %}">
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!-- CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style type="text/css">
+
+      /* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+    }
+
+    /* Wrapper for page content to push down footer */
+    #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+    }
+
+    /* Set the fixed height of the footer here */
+    #push,
+    #footer {
+        height: 60px;
+    }
+    #footer {
+        background-color: #f5f5f5;
+    }
+
+    /* Lastly, apply responsive CSS fixes as necessary */
+    @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+      }
+  }
+
+
+
+      /* Custom page CSS
+      -------------------------------------------------- */
+      /* Not required for template or sticky footer method. */
+
+      .container {
+        width: auto;
+        max-width: 680px;
+    }
+    .container .credit {
+        margin: 20px 0;
+    }
+
+    </style>
+    <link href="{% static 'css/bootstrap-responsive.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/readable/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    {% block head %}
-    {% endblock head %}
-</head>
-<body>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
 
-<div class="navbar navbar-fixed-top">
-   <div class="navbar-inner">
-     <div class="container">
-       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-       </a>
-       <a class="brand" href="../">Bootswatch</a>
-       <div class="nav-collapse" id="main-menu">
-        <ul class="nav" id="main-menu-left">
-          <li><a id="swatch-link" href="/#gallery">Gallery</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Preview <b class="caret"></b></a>
-            <ul class="dropdown-menu" id="swatch-menu">
-              <li><a href="../default">Default</a></li>
-              <li class="divider"></li>
-              <li><a href="../amelia">Amelia</a></li>
-              <li><a href="../cerulean">Cerulean</a></li>
-              <li><a href="../cosmo">Cosmo</a></li>
-              <li><a href="../cyborg">Cyborg</a></li>
-              <li><a href="../journal">Journal</a></li>
-              <li><a href="../readable">Readable</a></li>
-              <li><a href="../simplex">Simplex</a></li>
-              <li><a href="../slate">Slate</a></li>
-              <li><a href="../spacelab">Spacelab</a></li>
-              <li><a href="../spruce">Spruce</a></li>
-              <li><a href="../superhero">Superhero</a></li>
-              <li><a href="../united">United</a></li>
-            </ul>
-          </li>
-          <li class="dropdown" id="preview-menu">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Download <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a target="_blank" href="bootstrap.min.css">bootstrap.min.css</a></li>
-              <li><a target="_blank" href="bootstrap.css">bootstrap.css</a></li>
-              <li class="divider"></li>
-              <li><a target="_blank" href="variables.less">variables.less</a></li>
-              <li><a target="_blank" href="bootswatch.less">bootswatch.less</a></li>
-            </ul>
-          </li>
-        </ul>
-        <ul class="nav pull-right" id="main-menu-right">
-          <li><a rel="tooltip" target="_blank" href="http://builtwithbootstrap.com/" title="Showcase of Bootstrap sites &amp; apps" onclick="_gaq.push(['_trackEvent', 'click', 'outbound', 'builtwithbootstrap']);">Built With Bootstrap <i class="icon-share-alt"></i></a></li>
-          <li><a rel="tooltip" target="_blank" href="https://wrapbootstrap.com/?ref=bsw" title="Marketplace for premium Bootstrap templates" onclick="_gaq.push(['_trackEvent', 'click', 'outbound', 'wrapbootstrap']);">WrapBootstrap <i class="icon-share-alt"></i></a></li>
-        </ul>
-       </div>
-     </div>
-   </div>
- </div>
+      <!-- Fav and touch icons -->
+  </head>
+
+  <body>
 
 
-    <script src="http://code.jquery.com/jquery.min.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-transition.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-alert.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-modal.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-dropdown.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-scrollspy.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-tab.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-tooltip.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-popover.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-button.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-collapse.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-carousel.js"></script>
-    <script src="https://raw.github.com/twitter/bootstrap/master/js/bootstrap-typeahead.js"></script>
+    <!-- Part 1: Wrap all page content here -->
+    <div id="wrap">
+        {% include "nav.html" %}
+        <div class="container">
+        </div>
+
+        <div id="push"></div>
+    </div>
+
+    {% include "footer.html" %}
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
 </body>
 </html>
