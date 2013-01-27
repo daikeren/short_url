@@ -1,5 +1,7 @@
 from django.db import models
 
+from .utils import generate_code
+
 
 class Link(models.Model):
     class Meta:
@@ -15,5 +17,9 @@ class Link(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    def generate_code(self):
-        pass
+    def save(self, *args, **kwargs):
+        if not self.id:
+            super(Link, self).save(*args, **kwargs)
+            self.code = generate_code(self.id)
+
+        super(Link, self).save(*args, **kwargs)
