@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.detail import SingleObjectMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.core.urlresolvers import reverse
 
 from braces.views import JSONResponseMixin
 from .models import Link
@@ -36,6 +37,9 @@ class LinkCreateView(CreateView):
     model = Link
     template_name = 'short_url/index.html'
     form_class = LinkForm
+
+    def get_success_url(self):
+        return reverse('home')
 
 
 def visitShortURL(request, code):
