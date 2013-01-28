@@ -2,11 +2,13 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
 
+from url_shortener.views import LinkCreateView
+
 admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^$', TemplateView.as_view(template_name='short_url/index.html'),
+    url(r'^$', LinkCreateView.as_view(),
         name='home'),
     url(r'^short_url/', include('url_shortener.urls')),
     url(r'^admin/', include(admin.site.urls)),

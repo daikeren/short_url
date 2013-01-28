@@ -16,13 +16,15 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <style type="text/css">
+    </style>
 </head>
 <body>
-    <div id="wrap">
-        {% include "nav.html" %}
-        <div class="container">
-            {% block container %}
+    {% include "nav.html" %}
 
+    <div id="wrap">
+        <div class="container" style="margin-top: 70px;">
+            {% block container %}
             {% endblock container %}
         </div>
 
