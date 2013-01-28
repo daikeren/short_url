@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-from django.forms.models import model_to_dict
+from django.conf import settings
 
 from braces.views import JSONResponseMixin
 from .models import Link
@@ -44,9 +44,12 @@ class LinkCreateView(CreateView):
         format_dict = {
             'code': self.object.code,
             'url': self.object.url,
+            'base_url': settings.BASE_URL,
         }
-        msg = 'The shorten URL of {url} is {code}'.format(**format_dict)
-        messages.add_message(self.request, messages.INFO, msg)
+        msg = 'The shorten URL of <a href="{url}">{url}</a> \
+            is <a href="{base_url}{code}">{code}</a>'.format(**format_dict)
+        messages.add_message(
+            self.request, messages.INFO, msg)
         return reverse('url_shortener_home')
 
 

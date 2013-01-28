@@ -19,7 +19,7 @@ URL Shortner
 </form>
 {% if messages %}
     {% for message in messages %}
-        {{ message }}
+        {{ message|safe }}
     {% endfor %}
 {% endif %}
 
