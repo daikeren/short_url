@@ -1,10 +1,9 @@
 from django.conf import settings
 
-code = 'AP96YKVoviNBM2E1bmgrzcnRWalGZJFQ3Xsxq7L8kIduT540hpDwSCtfOjyHeU'
-
 
 def generate_code(value):
-    code = settings.SECRET_CODE
+    code = 'AP96YKVoviNBM2E1bmgrzcnRWalGZJFQ3Xsxq7L8kIduT540hpDwSCtfOjyHeU'
+    code = getattr(settings, 'SECRET_CODE', code)
     length = len(code)
     val = int(value)
 
@@ -12,7 +11,7 @@ def generate_code(value):
 
     while val > 0:
         d = val % length
-        result = result + code[(d ^ 0xff) % length]
+        result = result + code[d % length]
         val = int(val / length)
 
     if len(result) < 6:
