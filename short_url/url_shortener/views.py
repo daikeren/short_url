@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 class LinkObjectApiView(JSONResponseMixin, SingleObjectMixin, View):
     model = Link
+    slug_field = 'code'
 
     @csrf_exempt
     def dispatch(self, *args, **kwargs):
@@ -48,8 +49,13 @@ class LinkCreateView(CreateView):
         }
         msg = 'The shorten URL of <a href="{url}">{url}</a> \
             is <a href="{base_url}{code}">{code}</a>'.format(**format_dict)
+
         messages.add_message(
             self.request, messages.INFO, msg)
+
+        logger.debug('The shorten URL of {url} is generated as {code}'
+                     .format(**format_dict))
+
         return reverse('url_shortener_home')
 
 
@@ -57,5 +63,6 @@ def visitShortURL(request, code):
     link = get_object_or_404(Link, code=code)
     link.clicks += 1
     link.save()
-
+    logger.debug('Code {code} visited. Real URL: {url}'
+                 .format(code=code, url=link.url))
     return redirect(link.url)
