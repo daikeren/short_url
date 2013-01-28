@@ -1,5 +1,7 @@
 from django.views.generic import View
 from django.views.generic.detail import SingleObjectMixin
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect
 
 from braces.views import JSONResponseMixin
 from .models import Link
@@ -20,6 +22,9 @@ class LinkObjectApiView(JSONResponseMixin, SingleObjectMixin, View):
         return self.render_json_response(context_dict)
 
 
-def api(request):
+def visitShortURL(request, code):
+    link = get_object_or_404(Link, code=code)
+    link.clicks += 1
+    link.save()
 
-    pass
+    return redirect(link.url)
