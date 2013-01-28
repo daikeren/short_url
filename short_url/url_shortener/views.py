@@ -1,4 +1,5 @@
 import logging
+import json
 
 from django.views.generic import View
 from django.views.generic.edit import CreateView
@@ -9,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.conf import settings
 
-from braces.views import JSONResponseMixin
+from braces.views import JSONResponseMixin, AjaxResponseMixin
 from .models import Link
 from .forms import LinkForm
 
@@ -19,10 +20,6 @@ logger = logging.getLogger(__name__)
 class LinkObjectApiView(JSONResponseMixin, SingleObjectMixin, View):
     model = Link
     slug_field = 'code'
-
-    @csrf_exempt
-    def dispatch(self, *args, **kwargs):
-        return super(LinkObjectApiView, self).dispatch(*args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -36,7 +33,28 @@ class LinkObjectApiView(JSONResponseMixin, SingleObjectMixin, View):
         return self.render_json_response(context_dict)
 
 
-class LinkCreateView(CreateView):
+class LinkObjectCreateApiView(JSONResponseMixin, View):
+    @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(LinkObjectCreateApiView, self).dispatch(*args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = json.loads(self.request.raw_post_data)
+        form = LinkForm(data)
+        if form.is_valid():
+            instance = form.save()
+            json_dict = {
+                "url": instance.url,
+                "code": instance.code
+            }
+            return self.render_json_response(json_dict)
+
+        response = self.render_json_response(form.errors)
+        response.status_code = 400
+        return response
+
+
+class LinkCreateView(AjaxResponseMixin, CreateView):
     model = Link
     template_name = 'short_url/index.html'
     form_class = LinkForm
