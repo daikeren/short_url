@@ -1,0 +1,8 @@
+Django==1.4.3
+South==0.7.6
+Unipath==0.2.1
+django-braces==0.2.2
+django-crispy-forms==1.2.3
+django-extensions==1.0.2
+psycopg2==2.4.6
+wsgiref==0.1.2
