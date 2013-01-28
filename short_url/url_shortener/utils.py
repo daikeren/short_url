@@ -1,8 +1,10 @@
+from django.conf import settings
+
 code = 'AP96YKVoviNBM2E1bmgrzcnRWalGZJFQ3Xsxq7L8kIduT540hpDwSCtfOjyHeU'
-MIN_LENGTH = 6
 
 
 def generate_code(value):
+    code = settings.SECRET_CODE
     length = len(code)
     val = int(value)
 

@@ -45,7 +45,7 @@ class LinkObjectCreateApiView(JSONResponseMixin, View):
             instance = form.save()
             json_dict = {
                 "url": instance.url,
-                "code": instance.code
+                "short_url": settings.BASE_URL + instance.code
             }
             return self.render_json_response(json_dict)
 

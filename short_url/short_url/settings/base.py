@@ -9,7 +9,11 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+
+# for url_shortener
 BASE_URL = 'http://localhost:8000/'
+SECRET_CODE = 'AP96YKVoviNBM2E1bmgrzcnRWalGZJFQ3Xsxq7L8kIduT540hpDwSCtfOjyHeU'
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
