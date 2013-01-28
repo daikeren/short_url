@@ -7,8 +7,6 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^$', LinkCreateView.as_view(),
-        name='home'),
-    url(r'^short_url/', include('url_shortener.urls')),
+    url(r'', include('url_shortener.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
