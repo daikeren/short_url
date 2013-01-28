@@ -9,11 +9,11 @@ class Link(models.Model):
         verbose_name_plural = 'Links'
 
     def __unicode__(self):
-        pass
+        return '[{url}]({code})'.format(url=self.url, code=self.code)
 
     clicks = models.IntegerField(default=0)
     url = models.URLField(blank=True, max_length=512)
-    code = models.CharField(default="", max_length=10)
+    code = models.CharField(default="", max_length=10, db_index=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
