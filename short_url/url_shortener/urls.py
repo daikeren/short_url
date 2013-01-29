@@ -15,5 +15,5 @@ urlpatterns = patterns(
     url(r'^api/(?P<slug>[a-zA-Z0-9]{6})/?$', LinkObjectApiView.as_view(),
         name='url_shortener_api'),
     url(r'^api/$', LinkObjectCreateApiView.as_view(),
-        name='url_shortener_api'),
+        name='url_shortener_create_api'),
 )
